@@ -2,7 +2,7 @@
 
 namespace frontend\models\services\auth;
 
-use common\models\User;
+use common\repositories\UserRepository;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use Yii;
@@ -11,25 +11,28 @@ use yii\mail\MailerInterface;
 class PasswordResetService
 {
     private $mailer;
-    public function __construct(MailerInterface $mailer)
+    private  $users;
+    public function __construct(MailerInterface $mailer, UserRepository $users)
     {
         $this->mailer = $mailer;
+        $this->users = $users;
     }
 
     public function request(PasswordResetRequestForm $form)
     {
-        $user = User::findOne([
-            'status' => User::STATUS_ACTIVE,
-            'email' => $form->email,
-        ]);
+        $user = $this->users->getByEmail($form->email);
 
         if (!$user)
         {
             throw new \DomainException('User not found');
         }
 
+        if (!$user->isActive()) {
+            throw new \DomainException('User is not active.');
+        }
+
        $user->requestPasswordReset();
-       $user->save();
+       $this->users->save($user);
        $sent =  $this->mailer
             ->compose(
                 ['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'],
@@ -49,7 +52,7 @@ class PasswordResetService
         if (empty($token) || !is_string($token)) {
             throw new \DomainException('Password reset token cannot be blank.');
         }
-        $user = User::findByPasswordResetToken($token);
+        $user = $this->users->existsByPasswordResetToken($token);
         if (!$user) {
             throw new \DomainException('Wrong password reset token.');
         }
@@ -57,10 +60,10 @@ class PasswordResetService
 
     public function resetPassword($token, ResetPasswordForm $form)
     {
-        $user = User::findByPasswordResetToken($token);
+        $user = $this->users->getByPasswordResetToken($token);
         if(!$user)
             throw new \DomainException('User not found');
         $user->resetPassword($form->password);
-        return $user->save(false);
+        $this->users->save($user);
     }
 }

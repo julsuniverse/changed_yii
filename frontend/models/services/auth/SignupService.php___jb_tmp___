@@ -18,11 +18,11 @@ class SignupService
 
     public function requestSignup(SignupForm $form)
     {
-        if(User::findOne(['username' => $form->username]))
-            throw new \DomainException('User is already exist');
-        if(User::findOne(['email' => $form->email]))
-            throw new \DomainException('Email is already exist');
+        $this->users->alreadyExistEmail($form->email);
+        $this->users->alreadyExistUsername($form->username);
+
         $user = User::create($form->username, $form->email, $form->password);
+
         $this->users->save($user);
 
         $sent =  $this->mailer->compose([
