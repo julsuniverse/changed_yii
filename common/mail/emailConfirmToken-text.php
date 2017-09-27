@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $user common\models\User */
+/* @var $user shop\entities\User */
 
 $activateLink = Yii::$app->urlManager->createAbsoluteUrl(['site/confirm-email', 'token' => $token]);
 ?>

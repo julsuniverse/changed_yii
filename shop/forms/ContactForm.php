@@ -1,8 +1,7 @@
 <?php
 
-namespace frontend\models;
+namespace shop\forms;
 
-use Yii;
 use yii\base\Model;
 
 /**

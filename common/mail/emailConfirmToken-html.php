@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $user common\models\User */
+/* @var $user frontend\models\User */
 
 $activateLink = Yii::$app->urlManager->createAbsoluteUrl(['site/confirm-email', 'token' => $token]);
 ?>

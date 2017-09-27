@@ -1,8 +1,7 @@
 <?php
-namespace frontend\models;
+namespace shop\forms;
 
 use yii\base\Model;
-use common\models\User;
 
 /**
  * Signup form
