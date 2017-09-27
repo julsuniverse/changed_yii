@@ -41,7 +41,11 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
-                '<_a:about|contact|signup|login>' => 'site/<_a>',
+                '<_a:about>' => 'site/<_a>',
+                'contact' => 'contact/index',
+                'signup' => 'auth/signup/signup',
+                'signup/<_a:[\w-]+>' => 'auth/signup/<_a>',
+                '<_a:login|logout>' => 'auth/auth/<_a>',
                 '<_c:[\w\-]+>' => '<_c>/index',
                 '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',
                 '<_c:[\w\-]+>/<_a:[\w-]+>' => '<_c>/<_a>',

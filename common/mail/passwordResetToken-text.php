@@ -3,7 +3,7 @@
 /* @var $this yii\web\View */
 /* @var $user src\forms\User */
 
-$resetLink = Yii::$app->urlManager->createAbsoluteUrl(['site/reset-password', 'token' => $user->password_reset_token]);
+$resetLink = Yii::$app->urlManager->createAbsoluteUrl(['auth/reset/reset-password', 'token' => $user->password_reset_token]);
 ?>
 Hello <?= $user->username ?>,
 

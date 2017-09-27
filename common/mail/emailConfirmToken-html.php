@@ -4,7 +4,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $user frontend\models\User */
 
-$activateLink = Yii::$app->urlManager->createAbsoluteUrl(['site/confirm-email', 'token' => $token]);
+$activateLink = Yii::$app->urlManager->createAbsoluteUrl(['auth/signup/confirm-email', 'token' => $token]);
 ?>
 <div class="password-reset">
     <p>Hello,</p>
