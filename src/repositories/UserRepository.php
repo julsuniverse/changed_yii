@@ -1,6 +1,6 @@
 <?php
-namespace shop\repositories;
-use shop\entities\User;
+namespace src\repositories;
+use src\entities\User;
 class UserRepository
 {
     public function findByUsernameOrEmail($value): ?User

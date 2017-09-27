@@ -2,7 +2,7 @@
 namespace frontend\tests\unit\models;
 
 use Yii;
-use shop\entities\ContactForm;
+use src\entities\ContactForm;
 
 class ContactFormTest extends \Codeception\Test\Unit
 {

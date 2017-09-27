@@ -1,5 +1,5 @@
 <?php
-namespace shop\entities;
+namespace src\entities;
 
 use Yii;
 use yii\base\NotSupportedException;
