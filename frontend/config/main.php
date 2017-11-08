@@ -52,6 +52,9 @@ return [
                 '<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => '<_c>/<_a>',
             ],
         ],
+        'assetManager' => [
+            'appendTimestamp' => true,
+        ],
 
     ],
     'params' => $params,
